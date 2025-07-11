@@ -2,20 +2,29 @@ import { z } from "zod";
 
 export const categoryKeyEnum = z.enum(["efficiency", "shift", "downtime"]);
 
-export type CategoryKey = z.infer<typeof categoryKeyEnum>;
+export const metricTypesEnum = z.enum([
+  "percentage",
+  "number",
+  "secs",
+  "hours",
+]);
 
 export const MetricsSchemaData = z.object({
   id: z.string(),
   label: z.string(),
   value: z.number(),
   description: z.string(),
-  type: z.enum(["percentage", "number", "secs", "minutes", "hours"]),
+  type: metricTypesEnum,
   category: categoryKeyEnum,
 });
 
 export const APISchemaResponse = z.object({
   data: z.array(MetricsSchemaData),
 });
+
+export type CategoryKey = z.infer<typeof categoryKeyEnum>;
+
+export type MetricTypes = z.infer<typeof metricTypesEnum>;
 
 export type MetricsData = z.infer<typeof MetricsSchemaData>;
 

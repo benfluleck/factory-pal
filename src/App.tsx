@@ -1,75 +1,69 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Loader from "./components/Loader/Loader";
-import Select from "./components/Select/Select";
-import Table from "./components/Table/Table";
-import {
-  categoryKeyEnum,
-  type CategoryKey,
-  type MetricsData,
-} from "./entities/metricsData";
+import { type CategoryKey } from "./entities/metricsData";
 import { StatusSchema } from "./entities/status";
 import useMetricsData from "./hooks/useMetricsData";
 import { filterMetricsByCategory } from "./utils/utils";
+import Container from "./layout/Container/Container";
+import Dashboard from "./feature/dashboard/Dashboard";
 
-function App() {
+const App = () => {
   const { metricsData, status, headers } = useMetricsData();
-  const [category, setCategory] = useState<CategoryKey | "All">("All");
-  const [items, setItems] = useState<MetricsData[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<CategoryKey | "All">(
+    "All"
+  );
+  const [selectedMetricId, setSelectedMetricId] = useState<string | null>(null);
 
+  const filteredItems =
+    selectedCategory === "All"
+      ? metricsData
+      : filterMetricsByCategory(metricsData, selectedCategory);
 
-  useEffect(() => {
-    if (category === "All") {
-      setItems(metricsData);
-    }
-  }, [metricsData, category]);
+  const handleCategoryChange = (value: CategoryKey | "All") => {
+    setSelectedCategory(value);
+    setSelectedMetricId(null);
+  };
 
-  const handleCategoryChange = (value: CategoryKey | 'All') => {
-    setCategory(value);
-
-    if (value === "All") {
-      setCategory("All");
-      setItems(metricsData);
-    } else {
-      setCategory(value);
-      const filteredItems = filterMetricsByCategory(
-        metricsData,
-        value
-      );
-      setItems(filteredItems);
+  const handleCardListClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLElement;
+    const cardElement = target.closest("[data-index]");
+    if (cardElement) {
+      const index = cardElement.getAttribute("data-index");
+      setSelectedMetricId(index);
     }
   };
 
-  return (
-    <>
-      {status === StatusSchema.enum.LOADING && <Loader />}
-      <h1>Welcome to the React App</h1>
-      <p>This is a simple React application.</p>
-      <p>Feel free to modify it as you like!</p>
-      <p>Enjoy coding!</p>
+  const handleRowClick = (event: React.MouseEvent<HTMLTableElement>) => {
+    const target = event.target as HTMLElement;
+    const rowElement = target.closest("tr");
+    if (rowElement) {
+      const id = rowElement.getAttribute("data-id");
+      setSelectedMetricId(id);
+    }
+  };
 
-      <Select
-        selected={category}
-        onChange={handleCategoryChange}
-        options={categoryKeyEnum.options}
-      />
-      <Table
-        items={items}
-        headers={headers}
-        getKey={(item) => item.id}
-        getHeader={(header) => <th key={header}>{header}</th>}
-        getRow={(item) => (
-          <>
-            <td>{item.id}</td>
-            <td>{item.label}</td>
-            <td>{item.value}</td>
-            <td>{item.type}</td>
-            <td>{item.description}</td>
-            <td>{item.category}</td>
-          </>
-        )}
-      />
-    </>
+  const handleMetricSelect = (metricId: string | null) => {
+    setSelectedMetricId(metricId);
+  };
+
+
+  return (
+    <Container data-testid="app" aria-label="FactoryPal Metrics Dashboard">
+      {status == StatusSchema.enum.LOADING && <Loader />}
+      {status === StatusSchema.enum.SUCCESS && (
+        <Dashboard
+          metricsData={filteredItems}
+          selectedMetricId={selectedMetricId}
+          selectedCategory={selectedCategory}
+          tableHeaders={headers}
+          handleCategoryChange={handleCategoryChange}
+          handleCardListClick={handleCardListClick}
+          handleMetricSelect={handleMetricSelect}
+          handleRowClick={handleRowClick}
+        />
+      )}
+    </Container>
   );
-}
+};
 
 export default App;

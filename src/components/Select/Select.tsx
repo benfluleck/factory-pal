@@ -6,20 +6,23 @@ type SelectProps = {
   selected: string;
   onChange: (value: CategoryKey | "All") => void;
   options: string[];
+  title: string;
 };
 
 const SelectContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 1rem 0;
+  margin: ${({ theme }) => theme.space.md} 0;
+  padding: ${({ theme }) => theme.space.sm} 0;
+
 `;
 const StyledLabel = styled.label`
-  margin-bottom: 0.5rem;
+  margin-bottom: ${({ theme }) => theme.space.xs};
   font-weight: bold;
   color: ${({ theme }) => theme.colors.text};
 `;
 const StyledSelect = styled.select`
-  padding: 0.5rem;
+  padding: ${({ theme }) => theme.space.sm};
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 4px;
   background-color: ${({ theme }) => theme.colors.background};
@@ -32,16 +35,18 @@ const StyledSelect = styled.select`
   }
 `;
 
-const Select: FC<SelectProps> = ({ selected, onChange, options }) => {
+const Select: FC<SelectProps> = ({ selected, onChange, options, title }) => {
   return (
-    <SelectContainer>
-      <StyledLabel htmlFor="select">Choose a category:</StyledLabel>
+    <SelectContainer data-testid="select-container">
+      <StyledLabel htmlFor="select">{title}</StyledLabel>
       <StyledSelect
         id="select"
+        data-testid="select"
+        aria-label="Select category"
+        aria-required="true"
         onChange={(e) => onChange(e.target.value as CategoryKey | "All")}
         value={selected}
       >
-        <option value="All">All</option>
         {options.map((option) => (
           <option key={option} value={option}>
             {option}

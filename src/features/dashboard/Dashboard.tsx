@@ -46,7 +46,7 @@ const Dashboard: FC<DashboardProps> = ({
   return (
     <>
       <header>
-        <h1>FactoryPal Metrics Dashboard</h1>
+        <h1 data-testid="main-header">FactoryPal Metrics Dashboard</h1>
       </header>
       <Select
         selected={selectedCategory}

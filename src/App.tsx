@@ -5,9 +5,6 @@ import Dashboard from "./features/dashboard/Dashboard";
 import useDashboardMetrics from "./hooks/useDashboardMetrics";
 
 
-// sort ou the scroll on click
-
-
 const App = () => {
   const {
     selectedMetricId,

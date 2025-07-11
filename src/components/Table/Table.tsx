@@ -36,8 +36,6 @@ const TableCaption = styled.caption`
 `;
 
 const TableRow = styled.tr<{ $isSelected?: boolean }>`
-
-
   td {
     background-color: ${({ $isSelected, theme }) =>
       $isSelected ? theme.colors.tableRowSelected : "transparent"};

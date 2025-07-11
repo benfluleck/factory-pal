@@ -1,69 +1,57 @@
-# React + TypeScript + Vite
+# FactoryPal UI Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<img width="1440" alt="Client Side" src="./screenshots/image.png">
 
-Currently, two official plugins are available:
+# Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Getting Started](#getting-started)
+- [Technology Stack](#technology-stack)
+- [Installation](#installation)
+- [Testing](#testing)
+- [Features](#features)
+- [Questions](#questions)
+- [Support or Contribution](#support-or-contribution)
+- [Status](#status)
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
+This is a clientside javascript application built [React JS](https://reactjs.org/) application.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Technology Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+**Client Side**
+1. TypeScript
+2. React JS
+3. ReCharts
+4. Styled-Components
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Installation
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. Install [**Node JS**](https://nodejs.org/en/).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+2. Clone the [**repository here**](https://github.com/benfluleck/factory-pal.git)
+3. [**cd**] into the root of the **project directory**.
+4. Run `bun install` on the terminal to install project dependecies
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Testing
+
+Client side tests - Run `bun run test` on the terminal while within the **project root directory**.
+
+E2E tests - Run `bun run e2e` on the terminal while within the **project root directory**.
+
+Client side testing is achieved through the use of the `vitest` package and `react-testing library`.
+
+End to End testing is achieved with the help of `Cypress`
+
+## Features
+- Coming soon
+
+## Questions
+For more details contact benfluleck@gmail.com
+
+## Support or Contribution
+For any suggestions or contributions or issues please do raise them or email me.
+For **Contributiions**, Please clone the repo and implement a PR I would appreciate it
+
+## Status
+Still undergoing testing

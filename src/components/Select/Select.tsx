@@ -1,10 +1,11 @@
 import type { FC } from "react";
 import styled from "styled-components";
 import type { CategoryKey } from "../../entities/metricsData";
+import type { ALL } from "../../utils/constants";
 
 type SelectProps = {
   selected: string;
-  onChange: (value: CategoryKey | "All") => void;
+  onChange: (value: CategoryKey | ALL) => void;
   options: string[];
   title: string;
 };
@@ -14,7 +15,6 @@ const SelectContainer = styled.div`
   flex-direction: column;
   margin: ${({ theme }) => theme.space.md} 0;
   padding: ${({ theme }) => theme.space.sm} 0;
-
 `;
 const StyledLabel = styled.label`
   margin-bottom: ${({ theme }) => theme.space.xs};
@@ -44,7 +44,7 @@ const Select: FC<SelectProps> = ({ selected, onChange, options, title }) => {
         data-testid="select"
         aria-label="Select category"
         aria-required="true"
-        onChange={(e) => onChange(e.target.value as CategoryKey | "All")}
+        onChange={(e) => onChange(e.target.value as CategoryKey | ALL)}
         value={selected}
       >
         {options.map((option) => (

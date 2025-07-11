@@ -3,24 +3,19 @@ import styled from "styled-components";
 import { metricTypesEnum, type MetricTypes } from "../../entities/metricsData";
 
 type CardProps = {
-  $isSelected: boolean;
-  id: string;
   title: string;
   value: string | number;
   type: MetricTypes;
   description?: string;
 };
 
-const CardContainer = styled.button<{ $isSelected: boolean }>`
+const CardContainer = styled.div`
   text-align: left;
   margin: ${({ theme }) => theme.space.sm};
   padding: ${({ theme }) => theme.space.lg};
   border-radius: 8px;
   background: ${({ theme }) => theme.colors.background};
   box-shadow: ${({ theme }) => theme.boxShadow.card};
-  border: 2px solid
-    ${({ $isSelected, theme: { colors } }) =>
-      $isSelected ? colors.cardBackground : colors.transparent};
   transition: all 0.2s ease;
   &:hover {
     transform: translateY(-2px);
@@ -62,18 +57,13 @@ const CardDescription = styled.dd`
 `;
 
 const Card: FC<CardProps> = ({
-  $isSelected,
   title,
-  id,
   type,
   value,
   description,
 }) => (
   <CardContainer
-    $isSelected={$isSelected}
-    data-index={id}
     data-testid="card"
-    aria-pressed={$isSelected}
   >
     <CardBody>
       <CardTitle>{title}</CardTitle>

@@ -12,8 +12,6 @@ type CardListProps = {
     value: number;
     description: string;
   }[];
-  selectedId?: string | null;
-  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
   ariaLabel?: string;
 };
 
@@ -26,21 +24,16 @@ const CardListContainer = styled.section`
 
 const CardList: FC<CardListProps> = ({
   items,
-  onClick,
-  selectedId,
   ariaLabel,
 }) => {
   return (
     <CardListContainer
       aria-label={ariaLabel}
       data-testid="card-list"
-      onClick={onClick}
     >
       {items.map((item) => (
         <Card
           key={item.id}
-          id={item.id}
-          $isSelected={selectedId === item.id}
           title={item.label}
           type={item.type}
           value={formatMetricValue(item)}

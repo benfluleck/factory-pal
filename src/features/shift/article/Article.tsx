@@ -65,7 +65,7 @@ const ShiftArticle: FC<ShiftArticleProps> = ({
   const donutData = transformedData();
 
   return (
-    <ArticleCard title="Shift Metrics">
+    <ArticleCard title="Shift Metrics" id="shift-metrics">
       {donutData.length > 0 && (
         <DonutChart
           selectedMetricId={selectedMetricId}

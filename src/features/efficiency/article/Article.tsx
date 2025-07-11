@@ -46,7 +46,7 @@ const EfficiencyArticle: FC<EfficiencyArticleProps> = ({
   }));
 
   return (
-    <ArticleCard title="Efficiency Metrics">
+    <ArticleCard title="Efficiency Metrics" id="efficiency-metrics">
       {percentageData.length > 0 && (
         <DonutChart
           value="value"

@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 type ArticleCardProps = {
   title: string;
+  id?: string;
   children: React.ReactNode;
 };
 
@@ -28,11 +29,12 @@ const ArticleCardContent = styled.div`
   margin-top: 1rem;
 `;
 
-const ArticleCard: FC<ArticleCardProps> = ({ title, children }) => {
+const ArticleCard: FC<ArticleCardProps> = ({ title, children, id }) => {
   return (
     <ArticleCardContainer
       data-testid="article-card"
       aria-label={`${title} Article`}
+      id={id}
     >
       <header>
         <h3>{title}</h3>

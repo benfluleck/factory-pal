@@ -18,11 +18,7 @@ const StyledTable = styled.table`
     overflow: auto;
   }
 
-  tbody tr:nth-child(even) {
-    background-color: ${({ theme }) => theme.colors.tableRowEven};
-  }
-
-  tr:hover td {
+  tr:hover {
     background-color: ${({ theme }) => theme.colors.tableHover};
     cursor: pointer;
   }
@@ -41,9 +37,10 @@ const TableCaption = styled.caption`
 
 const TableRow = styled.tr<{ $isSelected?: boolean }>`
 
-td {
-  background-color: ${({ $isSelected, theme }) =>
-    $isSelected ? theme.colors.tableRowSelected : "transparent"};
+
+  td {
+    background-color: ${({ $isSelected, theme }) =>
+      $isSelected ? theme.colors.tableRowSelected : "transparent"};
     
 `;
 
@@ -54,6 +51,7 @@ export type TableProps<Item> = {
   getHeader: (header: string) => ReactNode;
   getRow: (item: Item) => ReactNode;
   getKey: (item: Item) => Key;
+  getDataId: (item: Item) => string | string[];
   selectedId?: string | null;
   onClick?: (event: React.MouseEvent<HTMLTableElement>) => void;
 };
@@ -67,8 +65,8 @@ const Table = <Item extends Record<string, unknown>>({
   title,
   selectedId,
   onClick,
+  getDataId,
 }: TableProps<Item>) => {
-  console.log("Table rendered with items:", selectedId);
   return (
     <StyledTable data-testid="table" onClick={onClick}>
       <TableCaption>{title}</TableCaption>
@@ -78,7 +76,7 @@ const Table = <Item extends Record<string, unknown>>({
       <tbody>
         {items.map((item) => (
           <TableRow
-            data-id={getKey(item)}
+            data-id={getDataId(item)}
             $isSelected={selectedId === getKey(item)}
             key={getKey(item)}
           >

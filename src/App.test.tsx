@@ -42,14 +42,12 @@ describe("App Component", () => {
         "header6",
       ],
       metricsData: [...mockMetricsData],
-      error: null,
-      setMetricsData: vi.fn(),
       setStatus: vi.fn(),
     });
 
     const { rerender } = render(<App />);
     rerender(<App />);
-    const dashboardElement = screen.getByText("Factory Metrics Dashboard");
+    const dashboardElement = screen.getByText("FactoryPal Metrics Dashboard");
     expect(dashboardElement).toBeInTheDocument();
   });
 });

@@ -21,6 +21,7 @@ describe("Table Component", () => {
       headers={mockHeaders}
       title="Test Table"
       getHeader={(header) => <th key={header}>{header}</th>}
+      getDataId={(item) => item.id}
       getRow={(item) => (
         <>
           <td>{item.id}</td>

@@ -11,14 +11,14 @@ import Section from "../../layout/Section/Section";
 import DowntimeArticle from "../downtime/article/Article";
 import EfficiencyArticle from "../efficiency/article/Article";
 import ShiftArticle from "../shift/article/Article";
+import { ALL } from "../../utils/constants";
 
 type DashboardProps = {
   metricsData: MetricsData[];
   selectedMetricId: string | null;
-  selectedCategory: CategoryKey | "All";
+  selectedCategory: CategoryKey | ALL;
   tableHeaders: string[];
-  handleCategoryChange: (value: CategoryKey | "All") => void;
-  handleCardListClick: (event: React.MouseEvent<HTMLDivElement>) => void;
+  handleCategoryChange: (value: CategoryKey | ALL) => void;
   handleMetricSelect: (metricId: string | null) => void;
   handleRowClick: (event: React.MouseEvent<HTMLTableElement>) => void;
 };
@@ -29,41 +29,32 @@ const Dashboard: FC<DashboardProps> = ({
   selectedCategory,
   tableHeaders,
   handleCategoryChange,
-  handleCardListClick,
   handleMetricSelect,
   handleRowClick,
 }) => {
-
-const showEfficiencyArticle =
-    selectedCategory === "All" ||
+  const showEfficiencyArticle =
+    selectedCategory === ALL ||
     selectedCategory === categoryKeyEnum.enum.efficiency;
 
   const showDowntimeArticle =
-    selectedCategory === "All" ||
+    selectedCategory === ALL ||
     selectedCategory === categoryKeyEnum.enum.downtime;
 
   const showShiftArticle =
-    selectedCategory === "All" ||
-    selectedCategory === categoryKeyEnum.enum.shift;
-
+    selectedCategory === ALL || selectedCategory === categoryKeyEnum.enum.shift;
 
   return (
     <>
       <header>
-        <h1>Factory Metrics Dashboard</h1>
+        <h1>FactoryPal Metrics Dashboard</h1>
       </header>
       <Select
         selected={selectedCategory}
         title="Select Category"
         onChange={handleCategoryChange}
-        options={["All", ...categoryKeyEnum.options]}
+        options={[ALL, ...categoryKeyEnum.options]}
       />
-      <CardList
-        items={metricsData}
-        onClick={handleCardListClick}
-        selectedId={selectedMetricId}
-        ariaLabel="Metrics Card List"
-      />
+      <CardList items={metricsData} ariaLabel="Metrics Card List" />
       <Section title="ChartMetrics">
         {showEfficiencyArticle && (
           <EfficiencyArticle
@@ -94,6 +85,7 @@ const showEfficiencyArticle =
           onClick={handleRowClick}
           title="Metrics Data"
           headers={tableHeaders}
+          getDataId={(item) => [item.id, item.category].join("-")}
           getKey={(item) => item.id}
           getHeader={(header) => <th key={header}>{header}</th>}
           getRow={(item) => (
@@ -111,6 +103,5 @@ const showEfficiencyArticle =
     </>
   );
 };
-
 
 export default Dashboard;

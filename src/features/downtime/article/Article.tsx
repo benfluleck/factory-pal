@@ -35,7 +35,7 @@ const DowntimeArticle: FC<DowntimeArticleProps> = ({
   }));
 
   return (
-    <ArticleCard title="Downtime Metrics">
+    <ArticleCard title="Downtime Metrics" id="downtime-metrics">
       {downtimeCategoryData.length > 0 && (
         <BarChart
           data={transformedBarData}

@@ -19,6 +19,7 @@
     "jsdom": "^26.1.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-error-boundary": "^6.0.0",
     "recharts": "^3.0.2",
     "styled-components": "^6.1.19",
     "vitest": "^3.2.4",

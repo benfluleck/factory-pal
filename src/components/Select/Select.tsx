@@ -38,7 +38,7 @@ const StyledSelect = styled.select`
 const Select: FC<SelectProps> = ({ selected, onChange, options, title }) => {
   return (
     <SelectContainer data-testid="select-container">
-      <StyledLabel htmlFor="select">{title}</StyledLabel>
+      <StyledLabel data-cy="select-label" htmlFor="select">{title}</StyledLabel>
       <StyledSelect
         id="select"
         data-testid="select"

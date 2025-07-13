@@ -79,6 +79,7 @@ const Dashboard: FC<DashboardProps> = ({
         )}
       </Section>
       <Section title="Metrics Table">
+        <p><small>Please click on a row</small></p>
         <Table
           items={metricsData}
           selectedId={selectedMetricId}

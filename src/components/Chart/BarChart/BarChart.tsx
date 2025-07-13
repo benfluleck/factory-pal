@@ -37,7 +37,7 @@ const BarChart: FC<BarChartProps> = ({
         width="100%"
         height="100%"
         minHeight={400}
-        minWidth={600}
+        minWidth={400}
       >
         <RechartsBarChart
           data={data}
@@ -53,7 +53,7 @@ const BarChart: FC<BarChartProps> = ({
           <YAxis />
           <Tooltip
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            formatter={(value: number, name: string, props: any) => [
+            formatter={(_value: number, _name: string, props: any) => [
               props.payload.originalValue,
             ]}
             labelFormatter={(label) => label}

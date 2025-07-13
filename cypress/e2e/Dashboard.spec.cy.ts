@@ -93,14 +93,22 @@ describe("FactoryPal Dashboard", () => {
         cy.get(SELECTORS.tableRow).first().should("have.css", "background-color", "rgb(209, 231, 255)");
       });
 
+
+
       it("should scroll up to the article section when a row is clicked", () => {
         cy.get(SELECTORS.tableRow).first().click();
         cy.get(SELECTORS.efficiencyArticle).should("be.visible");
       });
 
+      it("should allow clicking on label to focus on select", () => {
+        cy.get("[data-cy='select-label']").click();
+        cy.get("[data-testid='select']").should("have.focus");
+      });
+
+  
+
 
       it("should allow the select to be click on the select a category and update the table", () => {
-        cy.get("[data-testid='select-container']").should("exist");
         cy.get("[data-testid='select']").select("efficiency");
         cy.get(SELECTORS.tableRow).should("have.length.greaterThan", 0);
         cy.get(SELECTORS.tableRow).each((row) => {

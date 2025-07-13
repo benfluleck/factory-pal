@@ -6,6 +6,7 @@ import {
 import ArticleCard from "../../../components/ArticleCard/ArticleCard";
 import { filterMetricsByCategory } from "../../../utils/utils";
 import DonutChart from "../../../components/Chart/Donut/DonutChart";
+import { useTheme } from "styled-components";
 
 type ShiftArticleProps = {
   metricsData: MetricsData[];
@@ -18,6 +19,10 @@ const ShiftArticle: FC<ShiftArticleProps> = ({
   onMetricSelect,
   selectedMetricId,
 }) => {
+
+
+  const { colors } = useTheme();
+
   const shiftData = filterMetricsByCategory(
     metricsData,
     categoryKeyEnum.enum.shift
@@ -49,7 +54,7 @@ const ShiftArticle: FC<ShiftArticleProps> = ({
         value: cleanedShiftDataValue,
         category: categoryKeyEnum.enum.shift,
         originalValue: shiftData[0].value,
-        fill: "#8884d8",
+        fill: `${colors.percentage}`,
       },
       {
         id: shiftData[1].id,
@@ -57,7 +62,7 @@ const ShiftArticle: FC<ShiftArticleProps> = ({
         value: shiftDurationRatio,
         category: categoryKeyEnum.enum.shift,
         originalValue: shiftData[1].value * 60 * 60,
-        fill: "#82ca9d",
+        fill: `${colors.number}`,
       },
     ];
   };

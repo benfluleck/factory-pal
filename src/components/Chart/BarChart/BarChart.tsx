@@ -9,6 +9,7 @@ import {
 } from "recharts";
 import { ChartWrapper } from "../../../layout/Chart/wrapper";
 import type { MetricBarChartData } from "../../../entities/chart";
+import { useTheme } from "styled-components";
 
 type BarChartProps = {
   data: MetricBarChartData[];
@@ -23,6 +24,8 @@ const BarChart: FC<BarChartProps> = ({
   selectedMetricId,
   onMetricSelect,
 }) => {
+
+  const { colors } = useTheme();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleBarClick = (data: any) => {
     if (data && data.payload) {
@@ -60,10 +63,10 @@ const BarChart: FC<BarChartProps> = ({
           />
           <Bar
             dataKey="value"
-            fill="#4a6bdf"
+            fill={colors.percentage}
             onClick={handleBarClick}
             fillOpacity={0.7}
-            stroke="#4a6bdf"
+            stroke={colors.percentage}
             strokeWidth={selectedMetricId ? 1 : 0}
             animationDuration={1000}
           ></Bar>

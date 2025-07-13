@@ -10,6 +10,7 @@ import {
 } from "recharts";
 import type { PieSectorDataItem } from "recharts/types/polar/Pie";
 import { ChartWrapper } from "../../../layout/Chart/wrapper";
+import { useTheme } from "styled-components";
 
 type DonutChartProps = {
   value: string;
@@ -28,6 +29,9 @@ export const DonutChart: FC<DonutChartProps> = ({
   selectedMetricId,
   onMetricSelect,
 }) => {
+
+  const { colors } = useTheme();
+
   const handlePieClick = (data: PieSectorDataItem) => {
     if (data && data.payload) {
       const metricId = data.payload.id;
@@ -58,7 +62,7 @@ export const DonutChart: FC<DonutChartProps> = ({
           <Label
             value={title}
             position="center"
-            fill="grey"
+            fill={colors.text}
             style={{
               fontSize: "12px",
               fontWeight: "bold",

@@ -16,8 +16,9 @@ const theme: Theme = {
     tableRowSelected: "#D1E7FF",
     transparent: "transparent",
     cardBackground: "#1D284F",
-    number: "#37B24D",
-    percentage: "#4A6BDF",
+    number: "#82CA9D",
+    percentage: "#8884D8",
+
     secs: "#F59F00",
     hours: "#F76707",
   },

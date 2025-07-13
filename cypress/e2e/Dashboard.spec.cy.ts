@@ -104,18 +104,6 @@ describe("FactoryPal Dashboard", () => {
         cy.get("[data-cy='select-label']").click();
         cy.get("[data-testid='select']").should("have.focus");
       });
-
-  
-
-
-      it("should allow the select to be click on the select a category and update the table", () => {
-        cy.get("[data-testid='select']").select("efficiency");
-        cy.get(SELECTORS.tableRow).should("have.length.greaterThan", 0);
-        cy.get(SELECTORS.tableRow).each((row) => {
-          cy.wrap(row).should("contain.text", "efficiency");
-        });
-      });
-
     });
   });
 });

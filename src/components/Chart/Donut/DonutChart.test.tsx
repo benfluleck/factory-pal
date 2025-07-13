@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
+import type { ResponsiveContainerProps } from "recharts";
 import { render, screen } from "../../../utils/testUtils";
 import { DonutChart } from "./DonutChart";
-import type { ResponsiveContainerProps } from "recharts";
 import { mockChartData } from "../../../__mocks__/fixtures/metrics";
 
 vi.mock("recharts", async () => {
